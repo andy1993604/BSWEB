@@ -24,9 +24,17 @@
     }   
     </style>
     <script>
-    function myFunction(obj){
-           document.getElementById(obj).innerText="o";
-    }   
+            var flag = 0;
+            function SetPoint(obj) {
+                if (obj.innerText !="_") return;
+                if (flag == 0) {
+                    obj.innerText = "O"
+                    flag = 1
+                } else {
+                    obj.innerText = "X"
+                    flag = 0
+                }
+            }
     </script>
 </head>
 <body>
@@ -35,19 +43,19 @@
                     OOXX</caption><br />
         <table id="table1" border="1">
                     <tr>
-                        <td id="c1" onclick="myFunction('c1')">_</td>
-                        <td id="c2">_</td>
-                        <td id="c3">_</td>
+                        <td id="c1"onclick="SetPoint(document.getElementById('c1'))">_</td>
+                        <td id="c2"onclick="SetPoint(document.getElementById('c2'))">_</td>
+                        <td id="c3"onclick="SetPoint(document.getElementById('c3'))">_</td>
                     </tr>
                     <tr>
-                        <td id="c4" type="button" onclick="myFunction()">_</td>
-                        <td id="c5">_</td>
-                        <td id="c6">_</td>
+                        <td id="c4"onclick="SetPoint(document.getElementById('c4'))">_</td>
+                        <td id="c5"onclick="SetPoint(document.getElementById('c5'))">_</td>
+                        <td id="c6"onclick="SetPoint(document.getElementById('c6'))">_</td>
                     </tr>
                     <tr>
-                        <td id="c7" type="button" onclick="myFunction()">_</td>
-                        <td id="c8">_</td>
-                        <td id="c9">_</td>
+                        <td id="c7"onclick="SetPoint(document.getElementById('c7'))">_</td>
+                        <td id="c8"onclick="SetPoint(document.getElementById('c8'))">_</td>
+                        <td id="c9"onclick="SetPoint(document.getElementById('c9'))">_</td>
                     </tr>
                 </table>
     </div>
