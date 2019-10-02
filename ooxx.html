@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+ 
+    #table1{
+            width: 300px;
+            height: 300px;
+            border:solid 5px black;
+            border-collapse: collapse; 
+            }
+    tr,td{
+            text-align: center;
+            border:solid 2px black;
+            border-collapse: collapse;
+            cursor: pointer; 
+    }
+    #d1{
+         font-size:40px;
+    }   
+    </style>
+    <script>
+    function myFunction(obj){
+           document.getElementById(obj).innerText="o";
+    }   
+    </script>
+</head>
+<body>
+    <div id="d1">
+            <caption>
+                    OOXX</caption><br />
+        <table id="table1" border="1">
+                    <tr>
+                        <td id="c1" onclick="myFunction('c1')">_</td>
+                        <td id="c2">_</td>
+                        <td id="c3">_</td>
+                    </tr>
+                    <tr>
+                        <td id="c4" type="button" onclick="myFunction()">_</td>
+                        <td id="c5">_</td>
+                        <td id="c6">_</td>
+                    </tr>
+                    <tr>
+                        <td id="c7" type="button" onclick="myFunction()">_</td>
+                        <td id="c8">_</td>
+                        <td id="c9">_</td>
+                    </tr>
+                </table>
+    </div>
+      
+</body>
+</html>
