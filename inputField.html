@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+
+form{
+       
+        font-family: "微軟正黑體";
+        margin:0 auto;
+        padding: 100px;
+        width: 450px;
+        height: 400px;        
+}
+fieldset{
+          border-radius: 10px
+}
+
+</style>
+<body>
+    <form action="http://isbaas.azurewebsites.net/WebForms/Form2Mail.aspx?mailto=andy1993604@gmail.com&redirect=http://www.google.com" method="POST">
+        <fieldset>
+            <legend>個人資料-必填</legend>
+            <div>
+                <label>姓名:</label><input type="text" name="name" value=""></br>
+                <label>密碼:</label><input type="password" name="password"value=""></br>
+                    <input type="radio" name="gernder" id="" value="男">男生
+                    <input type="radio" name="gernder" id="" value="女">女生
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>個人資料-興趣</legend>
+                <div>
+                        <label>興趣:</label>
+                        <input type="checkbox" name="hobby" id=""value="運動">運動
+                        <input type="checkbox" name="hobby" id=""value="音樂">音樂
+                        <input type="checkbox" name="hobby" id=""value="閱讀">閱讀
+                        <input type="checkbox" name="hobby" id=""value="電影">電影</br>
+                        <label>專長:</label><textarea rows="4" cols="50"></textarea>                  
+                 </div>
+            </fieldset>
+            <fieldset>
+              <legend>個人資料-地址</legend>
+              <label>郵遞區號:</label><input type="text" name="postnum" value=""></br>
+              <select name="city" id="">
+                    <option value="1">台北</option>
+                    <option value="2">新北</option>
+                    <option value="3">新竹</option>
+                    <option value="4">高雄</option>
+                </select></br>
+              <label>其他地址:</label><input type="password" name="address"value="">
+            </fieldset>
+            <button type="submit" value="Submit">送出</button>
+            <button type="reset" value="Reset">清除</button>         
+    </form>
+  
+  
+</body>
+</html>
