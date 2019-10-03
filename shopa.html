@@ -68,7 +68,6 @@ table {
 
     #d1 {
         margin: 0 auto;
-        height: 130px;
         background: orangered;
         margin-bottom: 15px;
 
@@ -91,29 +90,48 @@ table {
     }
 
     #titlebar {
-        float: left;
-        margin-top: 20px;
-        margin-left: 200px;
-        height: 50px;
-        font-size: 40Px;
+        margin: auto;
+        display: inline-block;
+        padding:30px 200px;
+        font-size: 36px;
     }
 
     #title {
 
         color: white;
+        vertical-align: middle;
+   
+
     }
+
 
     #input1 {
-        font-size: 15pt;
+        border-radius:3px;
+        width: 700px;
+        border:none;
+        font-size:26px;
+        vertical-align: middle;
+        position: relative;
+        padding:2px;  
     }
-
     #btsearch {
-        border-radius: 5px;
-        height: 33px;
+        padding: 6px;
+        border-radius: 2px;
+        border:none;
         width: 60px;
-        font-size: 15pt;
+        left:-69px;
         color: white;
-        background: #E92C;
+        position: relative; 
+        font-size: 26px;
+        background: rgba(250, 146, 0, 0.8);
+        vertical-align: middle;   
+    }
+    i{
+        margin-right: 10px;
+    }
+    #scpoe{
+            margin-right: 0px;
+
     }
 
     .warp {
@@ -128,6 +146,10 @@ table {
         width: 895px;
         margin: 2px 2px 2px 2px;
         height: 298px;
+        background: url(https://cf.shopee.tw/file/40df64c41308e4cf0f4e9755f79a2706_xxhdpi);
+        background-size: 100%;
+        background-position: bottom;
+
         
     }
 
@@ -136,20 +158,28 @@ table {
         width: 497px;
         height: 298px;
         margin: 2px 2px 2px 2px;
-        background: white;
+        
     }
 
     #R1 {
         width: 497px;
         height: 147px;
         background: tomato;
-        margin-bottom: 2px;
+        margin-bottom: 2px;   
+        background: url(https://cf.shopee.tw/file/0dac0186d30e145d1d4b858bd83815d1_xhdpi);
+        background-size: 100%;
+        background-position: bottom;
+
     }
 
     #R2 {
         width: 497px;
         height: 147px;
         background: green;
+        background: url(https://cf.shopee.tw/file/c71670e5c9d61ca2faec9f6e83aec1a2_xxhdpi);
+        background-size: 100%;
+        background-position: bottom;
+
 
     }
 
@@ -211,24 +241,23 @@ table {
             <a href=""><i class="far fa-envelope-open"></i>下載</a>
             <a href=""><i class="fas fa-cart-arrow-down"></i>追蹤我們</a>
         </nav>
-        <span id="titlebar">
+        <div id="titlebar">
             <label id="title"><i class="fas fa-cart-plus"></i>蝦趴購物</label>
-            <input id="input1" style="border-radius: 3px;width: 500px;" type="text" name="textbox" placeholder="輸入搜尋文字">
-            <button id="btsearch" type="button"><i class="fas fa-search"></i></button>
-        </span>
+            <input id="input1"type="text" name="textbox" placeholder="輸入搜尋文字">
+            <button id="btsearch" type="button"><i id="scpoe"class="fas fa-search"></i></button>
+        </div>
     </div>
     <div class="warp">
         <div class="left">
             <!--<img src="https://fakeimg.pl/795x298/CCCCCC/?text=image">-->
-            <img src="https://cf.shopee.tw/file/40df64c41308e4cf0f4e9755f79a2706_xxhdpi" width="895" height="298">
+           <!-- <img src="https://cf.shopee.tw/file/40df64c41308e4cf0f4e9755f79a2706_xxhdpi" width="895" height="298">-->
         </div>
         <div class="right">
             <div id="R1">
-                <img src="https://cf.shopee.tw/file/0dac0186d30e145d1d4b858bd83815d1_xhdpi" width="497" height="147">
+                <!--<img src="https://cf.shopee.tw/file/0dac0186d30e145d1d4b858bd83815d1_xhdpi" width="497" height="147">-->               
                 <!--<img src="https://fakeimg.pl/597x147/CCCCCC/?text=image">-->
             </div>
             <div id="R2">
-                <img src="https://cf.shopee.tw/file/c71670e5c9d61ca2faec9f6e83aec1a2_xxhdpi" width="497" height="147">
                 <!--<img src="https://fakeimg.pl/597x147/CCCCCC/?text=image">-->
             </div>
         </div>
