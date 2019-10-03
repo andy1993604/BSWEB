@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Shopa</title>
+</head>
+<style>
+    /*css reset*/
+    /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+    /*--------------------css setting---------------------------*/
+    body {
+
+        font-family: "微軟正黑體";
+        background-color: #CCCCCC;
+    }
+
+    #d1 {
+        margin: 0 auto;
+        height: 130px;
+        background: orangered;
+        margin-bottom: 15px;
+
+    }
+
+    #nav1 {
+        margin-top: 5px;
+        background: #E92C25;
+        height: 40px;
+    }
+
+    a {
+        float: left;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-left: 10px;
+        text-decoration: none;
+    }
+
+    #titlebar {
+        float: left;
+        margin-top: 20px;
+        margin-left: 200px;
+        height: 50px;
+        font-size: 40Px;
+    }
+
+    #title {
+
+        color: white;
+    }
+
+    #input1 {
+        font-size: 15pt;
+    }
+
+    #btsearch {
+        border-radius: 5px;
+        height: 33px;
+        width: 60px;
+        font-size: 15pt;
+        color: white;
+        background: #E92C;
+    }
+
+    .warp {
+        margin: 0 auto;
+        width: 1400px;
+        height: 410px;
+        background-color: white;
+    }
+
+    .left {
+        float: left;
+        width: 895px;
+        margin: 2px 2px 2px 2px;
+        height: 298px;
+        
+    }
+
+    .right {
+        float: right;
+        width: 497px;
+        height: 298px;
+        margin: 2px 2px 2px 2px;
+        background: white;
+    }
+
+    #R1 {
+        width: 497px;
+        height: 147px;
+        background: tomato;
+        margin-bottom: 2px;
+    }
+
+    #R2 {
+        width: 497px;
+        height: 147px;
+        background: green;
+
+    }
+
+    .circle {
+        float: left;
+        width: 150px;
+        height: 100px;
+        text-align: center;
+        margin-left: 2px;
+        margin-right: 3px;
+    }
+
+    .circle img {
+        border-radius: 50px;
+    }
+
+    .warp2 {
+        margin: 0 auto;
+        margin-top: 10px;
+        width: 1400px;
+        height: 200px;
+        background: white;
+    }
+
+    .warp3 {
+        margin: 0 auto;
+        height: 100px;
+        background: #333333;
+        color: #E9E5E5;
+
+    }
+
+    .Rectangle {
+        margin-top: 10px;
+        margin-left: 40px;
+        margin-right: 50px;
+        float: left;
+        text-align: center;
+        color: red;
+    }
+
+    #ul1 {
+        margin-top: 40px;
+        float: right;
+        display: inline-flex;
+    }
+
+    li {
+        margin-left: 2px;
+
+
+    }
+</style>
+
+<body>
+    <div id="d1">
+        <nav id="nav1">
+            <a href=""><i class="fas fa-address-card"></i></i>賣家中心</a>
+            <a href=""><i class="far fa-envelope-open"></i>下載</a>
+            <a href=""><i class="fas fa-cart-arrow-down"></i>追蹤我們</a>
+        </nav>
+        <span id="titlebar">
+            <label id="title"><i class="fas fa-cart-plus"></i>蝦趴購物</label>
+            <input id="input1" style="border-radius: 3px;width: 500px;" type="text" name="textbox" placeholder="輸入搜尋文字">
+            <button id="btsearch" type="button"><i class="fas fa-search"></i></button>
+        </span>
+    </div>
+    <div class="warp">
+        <div class="left">
+            <!--<img src="https://fakeimg.pl/795x298/CCCCCC/?text=image">-->
+            <img src="https://cf.shopee.tw/file/40df64c41308e4cf0f4e9755f79a2706_xxhdpi" width="895" height="298">
+        </div>
+        <div class="right">
+            <div id="R1">
+                <img src="https://cf.shopee.tw/file/0dac0186d30e145d1d4b858bd83815d1_xhdpi" width="497" height="147">
+                <!--<img src="https://fakeimg.pl/597x147/CCCCCC/?text=image">-->
+            </div>
+            <div id="R2">
+                <img src="https://cf.shopee.tw/file/c71670e5c9d61ca2faec9f6e83aec1a2_xxhdpi" width="497" height="147">
+                <!--<img src="https://fakeimg.pl/597x147/CCCCCC/?text=image">-->
+            </div>
+        </div>
+        <!--<div class="circle"> <img src="https://fakeimg.pl/80x80/CCCCCC/?text=image"><p>交換禮物</p></div>-->
+        <div class="circle"> <img src="https://cf.shopee.tw/file/cda34cfd1235b787c2f6b378c906ebb7_tn" width="80"
+                height="80">
+            <p>戶外與運動用品</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/1071d365b731ef6e2619699c3b6d3492_tn" width="80"
+                height="80">
+            <p>娛樂收藏</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/17f3879a1872099681d7b85101e187db_tn" width="80"
+                height="80">
+            <p>女生衣著</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/227ec8335e695172de26c637ec8f8697_tn" width="80"
+                height="80">
+            <p>美妝保健</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/253830d7b66ebfc16b976c2f26643fa8_tn" width="80"
+                height="80">
+            <p>寵物</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/2ce3822327a87bd4e3e96a131e5ea082_tn" width="80"
+                height="80">
+            <p>遊戲王</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/dfaf1340a3440f2f664278081d909d45_tn" width="80"
+                height="80">
+            <p>居家生活</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/c000a3e95e7adc783826b992dbe2a5f7_tn" width="80"
+                height="80">
+            <p>家電影音</p>
+        </div>
+        <div class="circle"> <img src="https://cf.shopee.tw/file/71fa5b118eb60cabe38caa3cae4a8c93_tn" width="80"
+                height="80">
+            <p>男生衣著</p>
+        </div>
+    </div>
+    <div class="warp2">
+        <div class="Rectangle">
+            <img src="https://cf.shopee.tw/file/748ece43bf3c21981155ef3823b98265_tn" width="140" height="140">
+            <p>NT.3400</p>
+            <div class="w3-pale-red w3-round-xlarge">
+                <div class="w3-container w3-red w3-round" style="width:25%">25%</div>
+            </div>
+        </div>
+        <div class="Rectangle">
+            <img src="https://cf.shopee.tw/file/56790f62895560685b1dfde449da8968_tn" width="140" height="140">
+            <p>NT.88888</p>
+            <div class="w3-pale-red w3-round-xlarge">
+                <div class="w3-container w3-red w3-round" style="width:75%">75%</div>
+            </div>
+        </div>
+        <div class="Rectangle">
+            <img src="https://cf.shopee.tw/file/629a9b3d3ad346d0bd02de9806c384af_tn" width="140" height="140">
+            <p>NT.898844</p>
+            <div class="w3-pale-red w3-round-xlarge">
+                <div class="w3-container w3-red w3-round-xlarge" style="width:60%">60%</div>
+            </div>
+        </div>
+        <div class="Rectangle">
+            <img src="https://cf.shopee.tw/file/8508f8deeb320c04f42c159a51df65b7_tn" width="140" height="140">
+            <p>NT.5644444</p>
+            <div class="w3-pale-red w3-round-xlarge">
+                <div class="w3-container w3-red w3-round-xlarge" style="width:55%">55%</div>
+            </div>
+        </div>
+        <div class="Rectangle">
+            <img src="https://cf.shopee.tw/file/45449b3fb815eaef5712044f48bb1b15_tn" width="140" height="140">
+            <p>NT.4000000</p>
+            <div class="w3-pale-red w3-round-xlarge">
+                <div class="w3-container w3-red w3-round-xlarge" style="width:40%">40%</div>
+            </div>
+        </div>
+        <div class="Rectangle">
+            <img src="https://cf.shopee.tw/file/20edb2b72d73e9034a430bc9e27702cf_tn" width="140" height="140">
+            <p>NT.200000</p>
+            <div class="w3-pale-red w3-round-xlarge">
+                <div class="w3-container w3-red w3-round-xlarge" style="width:35%">35%</div>
+            </div>
+        </div>
+    </div>
+    <div class="warp3">
+        <p style="float:left;margin-top:40px;">© 2019 Shopa. 版權所有。</p>
+        <ul id="ul1">
+            <li>國家和地區:</li>
+            <li>台灣</li>
+            <li>|</li>
+            <li>日本</li>
+            <li>|</li>
+            <li>馬來西亞</li>
+            <li>|</li>
+            <li>新加坡</li>
+            <li>|</li>
+            <li>越南</li>
+            <li>|</li>
+            <li>泰國</li>
+        </ul>
+    </div>
+</body>
+
+</html>
