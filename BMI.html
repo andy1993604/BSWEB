@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <title>Document</title>
     <script>
         function myFunction() {
-            var height = document.getElementById('height').value/100;
+            var height = document.getElementById('height').value / 100;
             var weight = document.getElementById('weight').value;
             console.log(height);
             console.log(weight);
             var BMI = 0;
-            BMI = weight/(height*height);
+            BMI = weight / (height * height);
             document.getElementById('BMI').innerHTML = BMI;
         }
 
@@ -22,13 +24,32 @@
 </head>
 
 <body>
-    <div>身高:</div>
-    <input type="text" id="height" placeholder="請輸入身高"><br>
-    <div>體重:</div>
-    <input type="text" id="weight" placeholder="請輸入體重"><br>
-    <div>結果:<span id="BMI"></span></div>
-    <button type="submit" onclick="myFunction()">計算</button>
-
+    <div class="container">
+        <div class="row">
+            <div class=col>身高:</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                    <input class="form-control" type="text" id="height" placeholder="請輸入身高"><br>
+            </div>       
+        </div>
+        <div class="row">
+            <div class=col>體重:</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                    <input class="form-control"type="text" id="weight" placeholder="請輸入體重"><br>
+            </div>        
+        </div>
+        <div class="row">
+            <div class=col>結果:<span id="BMI"></span></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-danger" onclick="myFunction()">計算</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
