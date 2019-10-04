@@ -1,8 +1,70 @@
-<div class="card">
-        <h5 class="card-header">Featured</h5>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+     body{
+         font-family: "微軟正黑體";
+     }
+
+</style>
+<body>
+
+<div class="container">
+        <div class="row">
+          <div class="col-md-6">
+                <div class="card">
+                        <h5 class="card-header bg-danger text-white">個人資料-必填</h5>
+                        <div class="card-body">
+                                <label>姓名:</label><input class="form-control" type="text" name="name" value=""></br>
+                                <label>密碼:</label><input class="form-control"type="password" name="password"value=""></br>
+                                    <input type="radio" name="gernder" id="" value="男">男生
+                                    <input type="radio" name="gernder" id="" value="女">女生
+                        </div>
+                </div>
+          </div>
+          <div class="col-md-6">
+                <div class="card">
+                        <h5 class="card-header bg-primary text-white">個人資料-興趣</h5>
+                        <div class="card-body">
+                                <label>興趣:</label>
+                                <input type="checkbox" name="hobby" id=""value="運動">運動
+                                <input type="checkbox" name="hobby" id=""value="音樂">音樂
+                                <input type="checkbox" name="hobby" id=""value="閱讀">閱讀
+                                <input type="checkbox" name="hobby" id=""value="電影">電影</br>
+                                <label>專長:</label><textarea class="form-control" rows="4" cols="50"></textarea>
+                        </div>
+                </div>
+          </div>
         </div>
 </div>
+<div class="container">
+    <div class="row">
+            <div class="col-md-6">
+                    <div class="card">
+                            <h5 class="card-header bg-warning text-white">個人資料-地址</h5>
+                            <div class="card-body">
+                                    <label>郵遞區號:</label><input class="form-control" type="text" name="postnum" value=""></br>
+                                    <select name="city" id="">
+                                          <option value="1">台北</option>
+                                          <option value="2">新北</option>
+                                          <option value="3">新竹</option>
+                                          <option value="4">高雄</option>
+                                      </select></br>
+                                      <label>其他地址:</label><input class="form-control" type="password" name="address"value=""></br>
+                                      <input type="checkbox" name="agree" id="MustCheck"value="同意">是否同意使用個資</br>
+                                      <button class="btn btn-primary" type="submit" value="Submit">送出</button>
+                                        <button class="btn btn-danger" type="reset" value="Reset">清除</button>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+</body>
+</html>
