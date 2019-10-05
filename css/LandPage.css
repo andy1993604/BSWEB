@@ -1,0 +1,87 @@
+#title{
+
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 30pt;
+}
+.nav-link
+{
+    font-family: 'Archivo Black', sans-serif;
+  
+}
+#icon{
+
+    margin-right:20px;
+}
+.iconbt{
+
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 30pt;
+}
+h1{
+    text-align: center;
+    font-family: 'Bree Serif', serif;
+}
+h2{
+    text-align: center;
+    font-family: 'Bree Serif', serif;
+}
+h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: white;
+}
+h4{
+    font-family: 'Archivo Black', sans-serif;
+    color: white;
+    font-size: 14pt;
+}
+p{
+    font-family: 'Bree Serif', serif;
+}
+#img1{
+    background-size:contain;
+    background-image:url(/img/Eric.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#img2{
+    background-size:contain;
+    background-image:url(/img/stan.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#img3{
+    background-size:contain;
+    background-image:url(/img/Kyle-broflovski.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#img4{
+    background-size:contain;
+    background-image:url(/img/KennyMcCormick.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.imgheight{
+    height:200px;
+}
+.bt{
+    text-align: center;
+}
+#bg-lightblack{
+    background-color: #222222;
+}
+.bg-black{
+    background-color: black;
+}
+.time{
+    color: white;
+}
+#footer{
+
+    border-bottom:3px solid #ed1a3b;
+}
+.footericon{
+    color: white;
+    font-size: 20pt;
+}
