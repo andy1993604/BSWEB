@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!------------------------------Boostrap cdn--------------------------------------------------->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+    <title>Document</title>
+    <script>
+        //  function myFunction() {
+        //    var height = document.getElementById('height').value / 100;
+        //   var weight = document.getElementById('weight').value;
+        //  console.log(height);
+        // console.log(weight);
+        //var BMI = 0;
+        //BMI = weight / (height * height);
+        //document.getElementById('BMI').innerHTML = BMI;
+        //}
+        //$(selector).click(function (e) { 
+        //   e.preventDefault();
+        //  var height=jq
+        //});
+        function BMI() {
+            $('#Button1').click(function (e) {
+                var height = $('#textHeight').val()/100;
+                var weight = $('#textWeight').val();
+                var BMI = weight / (height * height);
+                $('#result').html(BMI);
+            });
+        }
+        $(function () {
+            BMI();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="row" style="margin:10px">
+        <div class="col-6">
+            <h1>BMI計算(改成jQuery版本)</h1>
+            <label>身高:</label>
+            <input class="form-control" id="textHeight" value="0" />
+            <label>體重:</label>
+            <input class="form-control" id="textWeight" value="0" />
+            <br />
+            <button class="btn btn-primary" id="Button1">計算</button>
+            <br />
+            <span id="result"></span>
+        </div>
+    </div>
+</body>
+
+</html>
