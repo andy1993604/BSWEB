@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!------------------------------Boostrap cdn--------------------------------------------------->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <style>
+        body {
+            font-family: "微軟正黑體";
+        }
+    </style>
+    <script>
+        //getElementById(抓取頁面上的元素)
+        function getElement(name) {
+            return document.getElementById(name);
+        }
+        //判斷是否可以送件
+        function Button_Submit() {
+            //抓取頁面上的checkboc1，取得是否checked
+            var isChecked = getElement('MustCheck').checked;
+            //如果是，就return true
+
+            if (isChecked) {
+                getElement("check").innerHTML = "登入成功";
+              return true;
+            }
+            //否則就... 
+            getElement("check").innerHTML="請先勾選同意在執行";
+            return false;
+        }
+        //當網頁載入完成後執行
+        window.onload = function () {
+            //hook event(在form1被submit時...)
+            getElement('form1').onsubmit = function () {
+                //呼叫 Button_Submit()
+                return Button_Submit();
+            };
+        };
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <form id="form1" class="bg-light rounded border" action="" method="dialog">
+                    <div class="col-auto bg-primary text-white mb-2 py-2">
+                        <span>登入系統</span>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="form-group mr-3">
+                            <div class=" col-auto mb-2">
+                                <button class="btn btn-danger text-center btn-block">註冊新帳號</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-user"></i></div>
+                                </div>
+                                <input type="text" class="form-control" id="UserName" placeholder="請輸入使用者帳號">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                                </div>
+                                <input type="text" class="form-control" id="UserName" placeholder="請輸入使用者密碼">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-check mx-left">
+                        <div class="col-auto">
+                            <input type="checkbox" class="form-check-input"  id="MustCheck">
+                            <label class="form-check-label" for="exampleCheck1">勾選我同意本系統<a
+                                    href="#">使用條款</a></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-auto">
+                            <button class="btn btn-primary text-center btn-block" data-toggle="modal"
+                                data-target="#exampleModal">登入</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <span id="check">請先勾選同意本系統在執行</span>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="mx-auto">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">確認</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
