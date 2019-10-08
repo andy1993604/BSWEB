@@ -12,6 +12,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <!--font awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <style>
+            .br15 {
+                border-radius: 15px;
+            }    
+            .br30 {
+                border-radius: 30px;
+            }
+    
+            .br50 {
+                border-radius: 50px;
+            }
+            body{
+                font-family: "微軟正黑體";
+                background:#8080801f;
+            }
+        </style>
 
     <title>Document</title>
     <script>
@@ -23,11 +39,18 @@
         //var BMI = 0;
         //BMI = weight / (height * height);
         //document.getElementById('BMI').innerHTML = BMI;
-        //}
-        //$(selector).click(function (e) { 
-        //   e.preventDefault();
-        //  var height=jq
+        //$(document).ready(function () {
+          //  $('#Button1').click(function (e) {
+           //     var height = $('#textHeight').val()/100;
+            //    var weight = $('#textWeight').val();
+            //    var BMI = 0;
+            //    BMI = weight / (height * height);
+            //    $('#BMI').html(BMI);
+ 
+            //});
         //});
+
+        //david老師
         function BMI() {
             $('#Button1').click(function (e) {
                 var height = $('#textHeight').val()/100;
@@ -36,26 +59,130 @@
                 $('#result').html(BMI);
             });
         }
+
         $(function () {
             BMI();
+            $('#CheckAll').click(function (e) {
+                console.log($('#CheckAll').prop('checked'));
+                if($('#CheckAll').prop('checked'))
+                {                
+                   $('#CheckBoxGroup input').prop('checked',true);
+                }
+                else
+                {
+                    $('#CheckBoxGroup input').prop('checked',false);
+                }               
+            });  
+            $('#sel01').change(function (e) {
+                var border=$('#sel01').val();
+                $('#ImgGroup2 img').removeClass();
+                $('#ImgGroup2 img').addClass(border);            
+            });
+            $('#ImgGroup3 img').hover( function() {
+                $(this).css("cursor","pointer");
+                $(this).css("transform", "scale(1.1)").css("transition-duration", "0.1s");              
+            },
+            function() {
+                $(this).css("transform", "scale(1)").css("transition-duration", "0.1s");   
+                
+            });        
         });
+        
+        
     </script>
 </head>
 
 <body>
-    <div class="row" style="margin:10px">
-        <div class="col-6">
-            <h1>BMI計算(改成jQuery版本)</h1>
-            <label>身高:</label>
-            <input class="form-control" id="textHeight" value="0" />
-            <label>體重:</label>
-            <input class="form-control" id="textWeight" value="0" />
-            <br />
-            <button class="btn btn-primary" id="Button1">計算</button>
-            <br />
-            <span id="result"></span>
-        </div>
+    <div class="container">
+            <div class="row justify-content-center"style="margin:10px" >
+                    <div class="col-7 bg-light border rounded mx-2 my-2">
+                        <h2 class="text-center">BMI計算(jQuery版本)</h2>
+                        <label>身高:</label>
+                        <input class="form-control" id="textHeight" value="0" />
+                        <label>體重:</label>
+                        <input class="form-control" id="textWeight" value="0" />
+                        <br />
+                        <button class="btn btn btn-outline-danger btn-block" id="Button1">計算</button>
+                        <br />
+                        <span id="result" class="text-danger"></span>
+                        <br />
+                    </div>
+                </div>
     </div>
+    
+   
+        <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>
+                        全部選取/取消
+                    </h2>
+                </div>    
+                <div class="col-md-4 bg-light mx-auto rounded border">
+                        <input id="CheckAll" type="checkbox" />勾選全部
+                        <div id="CheckBoxGroup">
+                            <input type="checkbox" />項目1
+                            <input type="checkbox" />項目2
+                            <input type="checkbox" />項目3
+                            <input type="checkbox" />項目4
+                            <input type="checkbox" />項目5
+                            <input type="checkbox" />項目6
+                            <input type="checkbox" />項目7
+                            <input type="checkbox" />項目8
+                        </div>
+                </div> 
+        </div> 
+        <div class="container">
+                <div id="ImgGroup2" class="row" style="margin:10px; padding-top:50px">
+                        <div class="col-md-12 text-center">
+                                <h2>
+                                    圖片依據選項調整圓角幅度
+                                </h2>
+                            </div>    
+                        <div class="col-12">
+                            <select id="sel01">
+                                <option value="br15">15px</option>
+                                <option value="br30">30px</option>
+                                <option value="br50">50px</option>
+                            </select>
+                        </div>
+                
+                        <div class="col-4">
+                            <img src="/img/1.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                        <div class="col-4">
+                            <img src="img/2.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                        <div class="col-4">
+                            <img src="img/3.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                    </div>
+            
+                    <div id="ImgGroup3" class="row" style="margin:10px; padding-top:50px">
+                        <div class="col-md-12 text-center py-2">
+                            <h2>
+                                滑鼠移進/移出圖片放大/縮小效果
+                            </h2>
+                        </div>            
+                        <div class="col-2">
+                            <img src="/img/1.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                        <div class="col-2">
+                            <img src="img/2.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                        <div class="col-2">
+                            <img src="img/3.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                        <div class="col-2">
+                            <img src="img/4.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                        <div class="col-2">
+                            <img src="img/5.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                        <div class="col-2">
+                            <img src="img/6.jpg" style="width:100%" class="img-responsive" />
+                        </div>
+                    </div>
+        </div>  
 </body>
 
 </html>
