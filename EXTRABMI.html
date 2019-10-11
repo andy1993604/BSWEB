@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ObjBMI</title>
+</head>
+<body>
+        <!doctype html>
+        <html lang="zh-TW">
+        
+        <head>
+            <title>GetDateTime</title>
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script>
+
+                function Show(msg) {
+                    //請改成jQuery
+                    document.getElementById('Label1').innerHTML += msg + "<br />";
+                    $('Label1').html()+msg+"<br />"
+                }
+                var BmiObj = {
+                
+                  /* ...補完其中的code... */
+                      height:0,
+                      weight:0,
+                      GetBmi:function() {
+                          let bmi=this.weight/(this.height*this.height);
+
+                          return bmi;
+                      }                
+                };
+        
+                function Button1_Click() {
+                    //請改成jQuery
+                    //BmiObj.height = document.getElementById('txbHeight').value;
+                    //BmiObj.weight = document.getElementById('txbWeight').value;
+                    //let bmi =BmiObj.GetBmi();
+                    //Show("BMI :" + bmi);
+                    BmiObj.height=$('#txbHeight').val()/100;
+                    BmiObj.weight=$('#txbWeight').val();
+                    console.log(BmiObj.height,BmiObj.weight);
+                    let bmi=BmiObj.GetBmi();
+                    Show("BMI:"+bmi);
+                }
+             
+            </script>
+        </head>     
+        <body>
+            <div class="container">
+                    <div class="row justify-content-center my-5 ">
+                            <div class="col-6 border rounded-lg my-5 bg-light">
+                                <label class="mt-3">身高:</label>
+                                <input id="txbHeight" class="form-control" type="text" placeholder="輸入身高" />
+                                <label>體重:</label>
+                                <input id="txbWeight" class="form-control" type="text" placeholder="輸入體重" />
+                    
+                                結果:<label id="Label1"class="text-danger"></label><br />
+                                <input class="btn btn-primary mb-3" type="button" id="Button1" onclick="Button1_Click();" value="計算" />
+                            </div>
+                        </div>
+            </div>          
+        </body>        
+        </html>    
+</body>
+</html>
