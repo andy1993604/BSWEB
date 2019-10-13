@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!------------------------------Boostrap cdn--------------------------------------------------->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <title>TranslateBot</title>
+</head>
+<style>
+    body {
+        font-family: "微軟正黑體";
+    }
+
+    textarea {
+        resize: none;
+    }
+</style>
+<script>
+
+    var leftValue = '';
+    var rightValue = '';
+    function clear() {
+        $('textarea').val('');
+    }
+   /* function change() {
+        leftValue = $('#leftSide').val();
+        rightValue = $('#rightSide').val();
+        $('#leftSide').val(rightValue);
+        $('#rightSide').val(leftValue);
+    }*/
+    function translate(type) {
+        let leftText=  $('#left-input').val();
+        let rightText= $('#right-input').val();
+        if (!leftText && !rightText) {
+            $('#left-input').val('未輸入文字');
+            $('#right-input').val('未輸入文字');
+            
+        }
+        let fromObj;
+        let toObj;
+        let sourceObj;
+        let outputObj;
+        if(type==='LTR')
+        {
+            fromObj = $('#leftSide');
+            toObj = $('#rightSide');
+            sourceObj = $('#left-input');
+            outputObj = $('#right-input');
+        }
+        else
+        {
+            fromObj = $('#rightSide');
+            toObj = $('#leftSide');
+            sourceObj = $('#right-input');
+            outputObj = $('#left-input');
+        }
+
+        source=$('#left-input').val();
+        from=fromObj.val();
+        to= toObj.val();  
+        $.ajax({
+         
+            type: "post", //http verb
+            headers: {
+                // http headers
+                "Ocp-Apim-Subscription-Key": "8a547ff059a14c4cb481c094b5846e4f",
+                "Content-Type": "application/json"
+            },
+            url: `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${from}&to=${to}`,
+            data: JSON.stringify([{ "Text": sourceObj.val() }]), //要翻譯的文字
+            dataType: "json",
+            complete(response){
+                debugger;
+            },
+            success: function (response) {
+                //呼叫遠端服務後的回傳結果
+                outputObj.val(response[0].translations[0].text);
+            }
+        });
+    }
+
+
+
+    $(document).ready(function () {
+        $('#btn-clear').click(clear);
+       /* $('#btn-change').click(change);*/
+        $('#btn-left').click(function(){translate('LTR')});
+        $('#btn-right').click(function(){translate('RTL')});
+
+    });
+
+</script>
+
+<body>
+    <div class="container">
+        <div class="row align-items-center justify-content-center mt-5">
+            <div class="col-md-5">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-dark text-light ">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-5 col-md-4 text-white">輸入/輸出文字</div>
+                            <div class="col-5 col-md-4">
+                                <select id="leftSide" class="form-control">
+                                    <option value="en">英文</option>
+                                    <option value="zh-Hant">繁體中文</option>
+                                    <option value="ja">日文</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <textarea id="left-input" class="form-control" rows="8" placeholder="請輸入翻譯文字"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1">
+               <!--
+                    <button id="btn-change" class="btn btn-block btn-danger shadow"><i
+                        class="fas fa-arrows-alt-h"></i></button>
+               --> 
+                <button id="btn-left" class="btn btn-block btn-danger shadow"><i
+                        class="fas fa-arrow-right"></i></button>
+                <button id="btn-right" class="btn btn-block btn-danger shadow"><i
+                        class="fas fa-arrow-left"></i></button>
+                <button id="btn-clear" class="btn btn-block btn-danger shadow"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="col-md-5">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-dark text-light">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-5 col-md-4 text-white">輸出/輸入文字</div>
+                            <div class="col-5 col-md-4">
+                                <select id="rightSide" class="form-control">
+                                    <option value="zh-Hant">繁體中文</option>
+                                    <option value="en">英文</option>
+                                    <option value="ja">日文</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <textarea id="right-input" class="form-control" rows="8" placeholder="請輸入翻譯文字"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!------------------------------Boostrap cdn--------------------------------------------------->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <title>JQuery-timer</title>
+    <style>
+        body{
+            font-family:"微軟正黑體";
+            line-height: 100vh;
+            text-align: center;
+        }
+        #result{
+            text-shadow: 1px 1px 7px #ff6a00;
+        }
+        .container
+        {
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;       
+        }
+        .disabled{
+            pointer-events: none;
+        }
+        
+    </style>
+    <script>
+
+
+        var inputM='';
+        var inputS='';
+        var total=0;
+        var minutes=0;
+        var seconds=0;
+        var ispause = false;
+        function Start() {
+            ispause = false;
+            $('#btnStart').addClass('disabled');
+            if($('#minute').val()=='')
+            {
+                $('#minute').val('0');
+            }
+            inputM=parseInt($('#minute').val());
+            inputS=parseInt($('#second').val());
+            total=(inputM*60)+inputS;
+            $('#minute').val('');
+            $('#second').val('');          
+            setTimeout(showClock, 1000);
+
+            }
+          
+          
+
+        function showClock() {          
+            if (ispause == false) {  
+                minutes = Math.floor((total/60));
+            seconds = Math.floor((total%60));
+            if(seconds<10)
+            {
+                $('#result').html(`${minutes}:0${seconds}`);
+            }
+            else
+            {
+             $('#result').html(`${minutes}:${seconds}`);
+            }                    
+                if(total==-1)
+                {   
+                    ispause=true;
+                    $('#btnStart').removeClass('disabled');
+                    return $('#result').html('time’s up');
+                  
+                }
+                else{
+                    total--;
+                    setTimeout(showClock, 1000);
+                } 
+                     
+           }
+        }
+        function pause() {
+            ispause = true;
+        }
+        function continueCount() {
+            ispause=false;
+            total+=1;
+            setTimeout(showClock, 1000);
+            
+        }
+        
+        $(document).ready(function () {
+            $('#btnStart').click(Start);
+            $('#btnPause').click(pause);
+            $('#btnContinue').click(continueCount);
+        });
+
+    </script>
+    <style>
+        @font-face {
+            font-family: digtal-7;
+            src: url('/fonts/digital-7.ttf');
+        }
+
+        #result {
+            font-family: digtal-7;
+            font-size: 50pt;
+        }
+    </style>
+</head> 
+
+<body>
+    <div class="container">
+                <div class="row justify-content-center align-items-center">
+                        <div class="col-md-6 text-center bg-dark text-white rounded rounded-lg p-4">
+                            <span id="result">countdown Timer</span>
+                            <div class="row justify-content-center">
+                                <div class="col-6 col-md-6">
+                                        M<input type="text" id="minute"class="form-control input-lg mt-2">
+                                </div>
+                                <div class="col-6 col-md-6">
+                                        S<input type="text" id="second"class="form-control input-lg mt-2">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center my-3">
+                                    <div class="col-6 col-md-4">
+                                        <button id="btnStart" class="btn btn-danger btn-block">Start</button>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <button id="btnPause" class="btn btn-danger btn-block">Stop</button>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                            <button id="btnContinue" class="btn btn-danger btn-block">Continue</button>
+                                    </div>
+                            </div>                         
+                        </div>
+                </div>
+               
+        </div>
+    </div>
+</body>
+
+</html>
