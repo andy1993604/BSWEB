@@ -34,8 +34,6 @@
         
     </style>
     <script>
-
-
         var inputM='';
         var inputS='';
         var total=0;
@@ -48,6 +46,10 @@
             if($('#minute').val()=='')
             {
                 $('#minute').val('0');
+            }
+            else if($('#second').val()=='')
+            {
+                $('#second').val('0');
             }
             inputM=parseInt($('#minute').val());
             inputS=parseInt($('#second').val());
@@ -119,7 +121,7 @@
 <body>
     <div class="container">
                 <div class="row justify-content-center align-items-center">
-                        <div class="col-md-6 text-center bg-dark text-white rounded rounded-lg p-4">
+                        <div class="col-md-6 text-center bg-dark text-white rounded rounded-lg p-4 shadow-lg">
                             <span id="result">countdown Timer</span>
                             <div class="row justify-content-center">
                                 <div class="col-6 col-md-6">
