@@ -30,19 +30,20 @@
     function clear() {
         $('textarea').val('');
     }
-   /* function change() {
+
+    function change() {
         leftValue = $('#leftSide').val();
         rightValue = $('#rightSide').val();
         $('#leftSide').val(rightValue);
         $('#rightSide').val(leftValue);
-    }*/
+    }
     function translate(type) {
         let leftText=  $('#left-input').val();
         let rightText= $('#right-input').val();
         if (!leftText && !rightText) {
             $('#left-input').val('未輸入文字');
             $('#right-input').val('未輸入文字');
-            
+            $('.alert').alert('未輸入文字');    
         }
         let fromObj;
         let toObj;
@@ -82,24 +83,31 @@
             },
             success: function (response) {
                 //呼叫遠端服務後的回傳結果
-                outputObj.val(response[0].translations[0].text);
+                var mydata=outputObj.val(response[0].translations[0].text);
             }
+            
         });
+        var getMyData={
+            
+            getData:function(){
+                localStorage.setItem('MyData', mydata);
+            }  
+        };
+      
+      
     }
-
-
-
     $(document).ready(function () {
         $('#btn-clear').click(clear);
-       /* $('#btn-change').click(change);*/
+        $('#btn-change').click(change);
         $('#btn-left').click(function(){translate('LTR')});
         $('#btn-right').click(function(){translate('RTL')});
-
+        alert(localStorage.getItem('MyData'));
     });
 
 </script>
 
 <body>
+        
     <div class="container">
         <div class="row align-items-center justify-content-center mt-5">
             <div class="col-md-5">
@@ -125,15 +133,13 @@
                 </div>
             </div>
             <div class="col-sm-1">
-               <!--
-                    <button id="btn-change" class="btn btn-block btn-danger shadow"><i
+                <button id="btn-change" class="btn btn-block btn-danger shadow"><i
                         class="fas fa-arrows-alt-h"></i></button>
-               --> 
-                <button id="btn-left" class="btn btn-block btn-danger shadow"><i
+                <button id="btn-left" class="btn btn-block btn-danger shadow "data-dismiss="alert"><i
                         class="fas fa-arrow-right"></i></button>
-                <button id="btn-right" class="btn btn-block btn-danger shadow"><i
+                <button id="btn-right" class="btn btn-block btn-danger shadow"data-dismiss="alert"><i
                         class="fas fa-arrow-left"></i></button>
-                <button id="btn-clear" class="btn btn-block btn-danger shadow"><i class="fas fa-times"></i></button>
+                <button id="btn-clear" class="btn btn-block btn-danger shadow"data-dismiss="alert"><i class="fas fa-times"></i></button>
             </div>
             <div class="col-md-5">
                 <div class="card shadow border-0">

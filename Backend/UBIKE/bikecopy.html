@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100vh;
+      } 
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+     
+        font-size:17pt;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        /* line-height: 100vh;
+        text-align: center; */
+      }
+      .row{
+        height: 100vh;
+        font-family:"微軟正黑體";
+      }
+    
+
+    </style>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag&callback=initMap"
+async defer></script>
+
+<script>
+  var map;
+
+$(function () {
+        //把UBIKE資料抓出來
+        
+    });
+function initMap() {
+var myLatLng = {lat: 25.0427205, lng:121.5376597};
+
+var map = new google.maps.Map(document.getElementById('map'), {
+zoom: 15,
+center: myLatLng
+});
+
+var marker = new google.maps.Marker({
+position: myLatLng,
+map: map,
+title: 'Hello World!'
+});
+var icons = {
+      ubike: {
+        icon:'bike.png'
+      },
+      bluebike:{
+         icon:'bike_blue.png'
+      }
+    };
+    var features=GetUbikeLocation();
+    // Create markers.將設定好的地址和icon顯示在map上
+    for (var i = 0; i < features.length; i++) {
+        //按照google map document給的顯示格式
+      var marker = new google.maps.Marker({
+          //
+        position: features[i].position,
+        //讀取icons的位置資訊
+        icon: icons[features[i].type].icon,
+        //顯示設定的資料在地圖上
+        map: map,
+        title:features[i].title
+      });
+      console.log('icons is',icons);
+      console.log('features of',i,'is',features);
+    };
+    function GetUbikeLocation(){
+        var data=[];
+        var area=[];
+        //呼叫OpenData
+        var Opendata=GetOpenData();
+        console.log('OpenData is',data);
+        //顯示每一個item的值
+
+        $.each(Opendata.retVal,function(i,item) {
+            console.log('i is',i);
+            console.log('item is',item);
+            var singleItem={
+            position:new google.maps.LatLng(item.lat,item.lng),
+            type:'ubike',
+            title:item.sbi+'/'+item.tot,
+            };
+            if(item.sbi<10){
+                singleItem.type='bluebike';
+            }
+            //將資料加入collection
+            data.push(singleItem);
+        });
+        return data;
+    }
+    function GetOpenData() {
+        var ubikelocation;
+        $.ajax({
+            type:"GET",
+            url: 'https://tcgbusfs.blob.core.windows.net/blobyoubike/YouBikeTP.json',
+            success: function (data) {
+                ubikelocation=data;
+            },
+            error: function () {
+              alert('fail');
+            },
+            async:false,
+        });
+        return ubikelocation;         
+    }
+}
+</script>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <div class="row">
+          <div id="view"class="col-md-2 text-center mt-3">
+              <ul class="list-group">
+                  <li class="list-group-item list-group-item-action">顯示全部</li>
+                  <li class="list-group-item list-group-item-action">信義區</li>
+                  <li class="list-group-item list-group-item-action">大安區</li>
+                  <li class="list-group-item list-group-item-action">中山區</li>
+                  <li class="list-group-item list-group-item-action">松山區</li>
+                  <li class="list-group-item list-group-item-action">南港區</li>
+                  <li class="list-group-item list-group-item-action">中正區</li>
+                  <li class="list-group-item list-group-item-action">萬華區</li>
+                  <li class="list-group-item list-group-item-action">文山區</li>
+                  <li class="list-group-item list-group-item-action">大同區</li>
+                  <li class="list-group-item list-group-item-action">士林區</li>
+                  <li class="list-group-item list-group-item-action">內湖區</li>
+                  <li class="list-group-item list-group-item-action">北投區</li>
+                </ul>           
+          </div>
+          <div class="col-md-10"> 
+              <div id="map"></div>
+          </div>
+        </div>
+
+    </div>
+
+  </body>
+</html>

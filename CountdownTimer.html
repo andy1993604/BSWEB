@@ -60,8 +60,6 @@
 
             }
           
-          
-
         function showClock() {          
             if (ispause == false) {  
                 minutes = Math.floor((total/60));
@@ -93,6 +91,7 @@
         }
         function continueCount() {
             ispause=false;
+            setTimeout(showClock,1000)
             total+=1;
             setTimeout(showClock, 1000);
             
