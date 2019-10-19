@@ -11,10 +11,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <!--font awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-     <!-- https://cdnjs.com/libraries/jquery-tagsinput -->
-     <link rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" />
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
+    <!-- https://cdnjs.com/libraries/jquery-tagsinput -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
     <!--DataTable-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -34,14 +34,14 @@
     </style>
     <script>
         var dat = [
-            ['Eric', '0912345678', '1980/1/1', 'eric@gmail.com', '台北市光復南路179號13樓','tagggg'],
+            ['Eric', '0912345678', '1980/1/1', 'eric@gmail.com', '台北市光復南路179號13樓', 'tagggg'],
         ];
         var dt = $('#table1').DataTable(
             { data: dat }
         );
         var isdisabled = false;
 
-     
+
         //儲存資料
         function SaveData() {
             var str = JSON.stringify(dat);
@@ -86,11 +86,11 @@
             refreshData();
         }
         function ButtonShowExport() {
-            let str =JSON.stringify(dat);
+            let str = JSON.stringify(dat);
             $('#field_DataJSON').val(str);
             $('#ButtonImport').addClass('disabled');
             $('#field_DataJSON').attr('readonly', 'readonly');
-           
+
         }
         function ButtonShowImport() {
             $('#field_DataJSON').val('');
@@ -98,17 +98,18 @@
                 $('#ButtonImport').removeClass('disabled');
                 $('#field_DataJSON').removeAttr('readonly', 'readonly');
                 ButtonImport();
-                
+
             }
         }
         function ButtonImport() {
-            
+
             let str = $('#field_DataJSON').val();
             dat = JSON.parse(str);
             SaveData();
-            refreshData();      
+            refreshData();
         }
-     
+        //跳出編輯和刪除的視窗
+
 
         $(document).ready(function () {
             //setup tag input 
@@ -122,6 +123,43 @@
             $('#ButtonImport').click(ButtonImport);
             dt = $('#table1').DataTable({ data: dat });
             LoadData();
+            $('#table1 tbody').on('click', 'tr', function () {
+
+                CurrentEditItem = dt.row(this).data();
+                $("#ed_Name").val(CurrentEditItem[0]);
+                $("#ed_Birthday").val(CurrentEditItem[1]);
+                $("#ed_TEL").val(CurrentEditItem[2]);
+                $("#ed_Email").val(CurrentEditItem[3]);
+                $("#ed_Address").val(CurrentEditItem[4]);
+                $('#ed_Tag').importTags(CurrentEditItem[5]);
+                $("#ModalEdit").modal();
+                $('#ed_Tag').tagsInput();
+
+            });
+            //編輯
+            $('#Button_edit').click(function (e) {
+                var n = dat.indexOf(CurrentEditItem);
+                dat[n] = [
+                    $("#ed_Name").val(),
+                    $("#ed_Birthday").val(),
+                    $("#ed_TEL").val(),
+                    $("#ed_Email").val(),
+                    $("#ed_Address").val(),
+                    $('#ed_Tag').val()];
+                SaveData();
+                LoadData();
+                $("#ModalEdit").modal('hide');//關閉視窗
+            });
+            //刪除
+            $('#Button_del').click(function (e) {
+                var n = dat.indexOf(CurrentEditItem);
+                //刪除指定位置的元素
+                dat.splice(n, 1);
+                RefreshData();
+                SaveData();
+                //更新
+                $("#ModalEdit").modal('hide');//關閉視窗
+            });
         });
     </script>
 </head>
@@ -134,7 +172,7 @@
 
         <div class="collapse navbar-collapse">
             <button class="btn btn-primary mr-5" id="ButtonShowAddNewWindow" data-toggle="modal"
-            data-target="#ModalAddNew">新增</button>
+                data-target="#ModalAddNew">新增</button>
 
             <button class="btn btn-danger mr-2" id="ButtonShowImport" data-toggle="modal"
                 data-target="#ModalDataExport">匯入</button>
@@ -169,13 +207,48 @@
                         <label>地址</label>
                         <input id="field_Address" type="address" class="form-control" />
                         <label>TAG</label>
-                        <input id="field_Tag"type="text"class="form-control" value="" data-role="tagsinput"/>
+                        <input id="field_Tag" type="text" class="form-control" value="" data-role="tagsinput" />
                     </form>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <button id="ButtonAddNew" type="button" class="btn btn-primary">新增</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit modal -->
+    <div class="modal" id="ModalEdit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">修改/刪除資料</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form>
+                        <label>姓名</label>
+                        <input id="ed_Name" type="text" class="form-control" />
+                        <label>生日</label>
+                        <input id="ed_Birthday" type="datetime" class="form-control" />
+                        <label>電話</label>
+                        <input id="ed_TEL" type="tel" class="form-control" />
+                        <label>email</label>
+                        <input id="ed_Email" type="email" class="form-control" />
+                        <label>地址</label>
+                        <input id="ed_Address" type="address" class="form-control" />
+                        <label>TAG</label>
+                        <input id="ed_Tag" type="text" class="form-control" value="" data-role="tagsinput" />
+                    </form>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button id="Button_edit" type="button" class="btn btn-success">修改</button>
+                    <button id="Button_del" type="button" class="btn btn-danger" data-dismiss="modal">刪除</button>
                 </div>
             </div>
         </div>
