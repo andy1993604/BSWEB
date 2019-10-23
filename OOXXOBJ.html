@@ -4,9 +4,10 @@
     <head>
         <title>OOXX-final-類別版, 判斷輸贏-題目版</title>
         <style>
-            body{
+            body {
                 font-family: "微軟正黑體";
             }
+
             td {
                 text-align: center;
                 cursor: pointer;
@@ -17,43 +18,39 @@
             class OOXX {
                 constructor() {
                     /* 初始化 */
-                    this.position=[];
-                    this.position[0]=['','',''];
-                    this.position[1]=['','',''];
-                    this.position[2]=['','',''];
-                    
+                    this.position = [];
+                    this.position[0] = ['', '', ''];
+                    this.position[1] = ['', '', ''];
+                    this.position[2] = ['', '', ''];
+
                 }
+
 
                 setPoint(x, y, point) {
                     /* todo */
-                    this.position[x][y]=point;
+                    this.position[x][y] = point;
                     //設定落子
                 }
 
                 HasWinner() {
                     /* 判斷勝利者 */
-                    let i=0;
-                    for(let i=0;i<=2;i++)
-                    {
-                        if(this.position[i][0]==this.position[i][1]&&this.position[i][1]==this.position[i][2])
-                        {
+                    let i = 0;
+                    for (let i = 0; i <= 2; i++) {
+                        if (this.position[i][0] == this.position[i][1] && this.position[i][1] == this.position[i][2]) {
                             return this.position[i][0];
                         }
-                        else 
-                            if(this.position[0][i]==this.position[1][i]&&this.position[1][i]==this.position[2][i])
-                        {
-                            return this.position[0][i];
-                        }
+                        else
+                            if (this.position[0][i] == this.position[1][i] && this.position[1][i] == this.position[2][i]) {
+                                return this.position[0][i];
+                            }
                     }
-                    if(this.position[0][0]==this.position[1][1]&&this.position[1][1]==this.position[2][2])
-                    {
+                    if (this.position[0][0] == this.position[1][1] && this.position[1][1] == this.position[2][2]) {
                         return this.position[0][0];
                     }
                     else
-                    if(this.position[0][2]==this.position[1][1]&&this.position[1][1]==this.position[2][0])
-                    {
-                        return this.position[0][2];
-                    }
+                        if (this.position[0][2] == this.position[1][1] && this.position[1][1] == this.position[2][0]) {
+                            return this.position[0][2];
+                        }
 
                     return '';
                 }
@@ -109,5 +106,7 @@
         <label id=lebel1>desc:</label>
 
     </body>
+
+   
 
     </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!------------------------------Boostrap cdn--------------------------------------------------->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!--font awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <title>Document</title>
+    <style>
+        .PicCell {
+            width: 120px;
+            height: 120px;
+            border-top: solid 1px white;
+            border-left: solid 1px white;
+            border-right: solid 1px gray;
+            border-bottom: solid 1px gray;
+            float: left;
+            overflow: hidden;
+
+        }
+
+        #picSet {
+            border: solid 5px blue;
+        }
+    </style>
+    <script>
+
+
+        function SetPicture() {
+            //  for(let i=1;i<=9;i++)
+            //  {
+            //     var block=3;
+            //     $('#picSet').append("<div class='PicCell' id='pic" + i + "'><img width='600px' height='600px' src='img/cat.jpg' /></div>");
+            //     $('#pic'+i+'img').css("margin-left", block * -120 ).css("margin-top", block* -120);
+
+            // }
+            for (var i = 1; i <= 9; i++) {
+                $("#picSet").append(`<div class='PicCell' id='Pic${i}'><img src='img/cat.jpg' /></div>`);
+                var row = parseInt(i / 3);
+                var col = i % 3;
+                $("#Pic" + i + " img").css("margin-left", row * -200).css("margin-top", col * -200);
+                //第i個換成第row列第col行
+                // posConv[i] = { row:row, col:col };
+            }
+        }
+        $(document).ready(function () {
+            SetPicture();
+        });   
+    </script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div id="picSet" class="row justify-content-center">
+            <!-- <div id="picSet"class="col-6 p-0">
+
+            </div> -->
+            <div class="col-2">
+                <button class="btn btn-danger btn-block">開始</button>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
