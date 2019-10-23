@@ -31,13 +31,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <style>
-    body{
-
-      font-family: "微軟正黑體";
-    }
-  
-  </style>
   <script>
     var numList = [];
     var gameStarted = false;
@@ -67,70 +60,60 @@
       gamestarted = false;
       $('#start').removeClass('disabled');
       numList = [];
-      $('#answer').text('GameMessage:請重新按下開始鈕').addClass('text-danger');
+      $('#answer').html('請重新按下開始鈕').addClass('text-danger');
     }
     function showAnswer() {
       if (gameStarted == false) {
-        $('#answer').text('GameMessage:GameMessage:請按下開始鈕後在偷看').addClass('text-danger');
+        $('#answer').html('請按下開始鈕後在偷看').addClass('text-danger');
       }
       else {
-        $('#answer').text('GameMessage:'+numList).addClass('text-danger');
+        $('#answer').html(numList).addClass('text-danger');
       }
     }
-    // var inputNum;
+    var inputNum;
     function checkInput() {
-      var inputNum = $('#userGuess').val();
+      inputNum = $('#userGuess').val();
       console.log('inputNum is', inputNum);
       if (gameStarted == false) {
-        $('#answer').text('GameMessage:請先按開始鈕在猜').addClass('text-danger');
+        $('#answer').html('請先按開始鈕在猜').addClass('text-danger');
       }
       else {
         console.log('isNaN(inputNum)', isNaN(inputNum));
         if (isNaN(inputNum) == false && inputNum.length != 4) {
-          $('#answer').text('GameMessage:輸入格式錯誤，請輸入不同的四位數字').addClass('text-danger');
+          $('#answer').html('輸入格式錯誤，請輸入不同的四位數字').addClass('text-danger');
         }
         console.log('inputNum.length', inputNum.length)
 
         for (let i = 0; i < inputNum.length; i++) {
           for (let j = 0; j < inputNum.length; j++) {
             if (inputNum[i] == inputNum[j] && i != j) {
-              return $('#answer').text('GameMessage:輸入格式錯誤，請輸入不同的四位數字').addClass('text-danger');
+              return $('#answer').html('輸入格式錯誤，請輸入不同的四位數字').addClass('text-danger');
             }
           }
         }
       }
-      return inputNum;
     }
     function result() {
-      var inputNum = checkInput();
+      checkInput();
 
       for (let i = 0; i < numList.length; i++) {
 
 
-        if (inputNum[i]==numList[i]) {
+        if (numList.indexOf(parseInt(inputNum[i])) != -1 && numList[i] == inputNum[i]) {
 
           A++;
         }
         else {
-          
-          if (numList.indexOf(parseInt(inputNum[i]))> -1) {
+          if (condition) {
             
+          }
             B++;
-          }         
         }
-      }
-      if(parseInt(A)==4)
-      {
-        $('#guessResults').append(`<li class="list-group-item"><span class="label label-success">4A0B</span>${inputNum}</li>`);
-      }
-      else{
-        $('#guessResults').append(`<li class="list-group-item"><span class="label label-danger mr-2">${A}A${B}B</span>${inputNum}</li>`);
       }
       console.log('A is', A);
       console.log('B is', B);
 
     }
-  
 
     $(document).ready(function () {
       gamestarted = false;
@@ -199,22 +182,28 @@
           <div class="row">
             <div class="col-md-12">
               <div class="btn-group btn-group-justified">
-                <a id="start" type="button" class="btn btn-danger">開始</a>
-                <a id="restart" type="button" class="btn btn-warning">放棄重來</a>
-                <a id="cheat" type="button" class="btn btn-primary">看答案</a>
+                <a id="start" type="button" class="btn btn-default">開始</a>
+                <a id="restart" type="button" class="btn btn-default">放棄重來</a>
+                <a id="cheat" type="button" class="btn btn-default">看答案</a>
               </div>
               <br>
               <ul id="guessResults" class="list-group">
                 <li id="answer" class="list-group-item">
-                  <span>GameMessage:</span>
+                  <span class="label label-danger">0A1B</span>
                   <!--<span class="badge">0A1B</span>-->
+                  1234
+                </li>
+                <li class="list-group-item">
+                  <span class="label label-success">4A0B</span>
+                  <!--<span class="badge badge-success">4A0B</span>-->
+                  6385
                 </li>
               </ul>
               <div class="input-group">
                 <span class="input-group-addon" id="sizing-addon1">猜答案</span>
                 <input id="userGuess" type="text" name="" class="form-control" value="" required="required">
                 <span class="input-group-btn">
-                  <a id="guess" type="button" class="btn btn-success">猜!</a>
+                  <a id="guess" type="button" class="btn btn-default">猜!</a>
                 </span>
               </div>
             </div>
