@@ -68,17 +68,21 @@
 
         function start() {
             //將當前index狀態設為一般(未選取)
+            Cards[index].className="clear";
              //先清除狀態
             //跑下一張
-            
+            index++;
             //如果超過陣列範圍，則歸零
-             
+            if (index > Cards.length - 1) {
+                index = 0;
+            }
+            Cards[index].className = "imgs";
             //將下一張設為選取樣式
-            times--;
             console.log(times);
             
             if (times > 0) {
-                //倒數幾次的時候翻牌
+                times--;
+                if (times == 5) //倒數幾次的時候翻牌
                 SetupRandomCards();
                 //100毫秒後清空
                 setTimeout(start, 100);
