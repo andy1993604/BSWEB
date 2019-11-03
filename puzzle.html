@@ -14,57 +14,151 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <title>Document</title>
     <style>
+        body {
+            font-family: "微軟正黑體";
+        }
+
         .PicCell {
-            width: 120px;
-            height: 120px;
+            width: 198px;
+            height: 198px;
             border-top: solid 1px white;
             border-left: solid 1px white;
             border-right: solid 1px gray;
             border-bottom: solid 1px gray;
-            float: left;
             overflow: hidden;
-
         }
 
-        #picSet {
-            border: solid 5px blue;
+        .imgSize {
+            width: 600px;
+            height: 600px;
         }
     </style>
     <script>
+        var level;
+        var totalpiece;
+        function getLV() {
+            let n = $('#pick').val();
+            return n
+        }
+        var piclist = [];
+        function SetPicture(level) {
+            piclist = [];
+            let picSet = document.getElementById('picSet');
+            picSet.innerHTML = '';
+            let currentRow;
+            totalpiece = level * level;
+            let piece = 600 / level;
+            for (var i = 0; i < totalpiece; i++) {
+                let row = parseInt(i / level);
+                let col = i % level;
+                if (col == 0) {
+                    currentRow = document.createElement("div");
+                    picSet.appendChild(currentRow);
+                    $(currentRow).addClass('row');
+                }
+                //用程式的方式新增這段HTML
+                //<div class='PicCell col-4 col-4 p-0' id='Pic${i}'><img src='img/cat.jpg'class="imgSize" /></div>
+                //STEP1 新增Col
+                let currentCell = document.createElement("div");
+                currentRow.appendChild(currentCell);
+                $(currentCell).addClass('PicCell col p-0 shadow');
+                $(currentCell).attr('id', `Pic${i}`);
+                $(currentCell).css('height', `${piece - 2}px`);
+                $(currentCell).css('width', `${piece - 2}px`);
+                //STEP2 新增IMG
 
+                let currentImg = document.createElement("img");
+                currentCell.appendChild(currentImg);
+                //設定圖片Src、Class、位置
+                $(currentImg).attr('src', 'img/cat.jpg');
+                $(currentImg).addClass('imgSize');
+                $(currentImg).css("margin-left", col * -piece).css("margin-top", row * -piece);
+                piclist.push(currentImg);
+                // console.log(col * -piece,',', row * -piece);
+                // var pos=$(`#Pic${i}`).offset();
+                // console.log(`Pic${i}`,pos.top,pos.left);
+            }
 
-        function SetPicture() {
-            //  for(let i=1;i<=9;i++)
-            //  {
-            //     var block=3;
-            //     $('#picSet').append("<div class='PicCell' id='pic" + i + "'><img width='600px' height='600px' src='img/cat.jpg' /></div>");
-            //     $('#pic'+i+'img').css("margin-left", block * -120 ).css("margin-top", block* -120);
+        }
+        //取亂數
+        var randomlist = [];
+        function randomPos() {
+            let rtnList=[];
+            for (let i = 0; i < totalpiece; i++) {
+                let randomPic = Math.floor(Math.random() * totalpiece);
+                while (rtnList.indexOf(randomPic) !== -1) {
+                    randomPic = Math.floor(Math.random() * totalpiece);
+                }
+                rtnList.push(randomPic)
+            }
+            return rtnList;
+        }
+        function setPic() {
 
-            // }
-            for (var i = 1; i <= 9; i++) {
-                $("#picSet").append(`<div class='PicCell' id='Pic${i}'><img src='img/cat.jpg' /></div>`);
-                var row = parseInt(i / 3);
-                var col = i % 3;
-                $("#Pic" + i + " img").css("margin-left", row * -200).css("margin-top", col * -200);
-                //第i個換成第row列第col行
-                // posConv[i] = { row:row, col:col };
+        }
+        //清除最後一個div的img當作空格
+        function removeimg() {
+            $(`#Pic${totalpiece - 1} img`).remove();
+        }
+        function disablePick() {
+            $('#pick').attr('disabled', true);
+        }
+        function shuffle() {
+            randomlist = randomPos();
+            let piece = 600 / level;
+            for(let i=0;i<randomlist.length;i++)
+            {
+                let row = parseInt(i / level);
+                let col = i % level;
+                $(piclist[randomlist[i]]).css("margin-left", col * -piece).css("margin-top", row * -piece);
             }
         }
+        function abort() {
+            location.reload();
+        }
+
+
         $(document).ready(function () {
-            SetPicture();
+            $('#pick').change(function (e) {
+                level = getLV();
+                SetPicture(level)
+            });
+            $('#pick').trigger('change');
+            $('#btnStr').click(removeimg);
+            $('#btnStr').click(disablePick);
+            $('#btnStr').click(shuffle);
+            $('#abortGame').click(abort);
         });   
     </script>
 </head>
 
 <body>
     <div class="container mt-5">
-        <div id="picSet" class="row justify-content-center">
-            <!-- <div id="picSet"class="col-6 p-0">
+        <div class="row justify-content-center">
+            <div id="picSet" class="col-6 p-0 justify-content-center">
 
-            </div> -->
-            <div class="col-2">
-                <button class="btn btn-danger btn-block">開始</button>
-
+            </div>
+            <div class="col-3 ml-4 mb-5">
+                <div class="row mb-4">
+                    <div class="col-3 col-12 text-center">
+                        <p>難度選擇</p>
+                        <select id="pick" class="form-control">
+                            <option value="3">3x3</option>
+                            <option value="4">4x4</option>
+                            <option value="5">5x5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-3 col-12">
+                        <button id="btnStr" class="btn btn-danger btn btn-block shadow">開始</button>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-3 col-12">
+                        <button id="abortGame" class="btn btn-danger btn btn-block shadow">放棄重來</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
