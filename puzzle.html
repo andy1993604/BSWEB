@@ -81,7 +81,7 @@
 
         }
         //取亂數
-        var randomlist = [];
+        var randomlist = [];    
         function randomPos() {
             let rtnList=[];
             for (let i = 0; i < totalpiece; i++) {
@@ -98,7 +98,7 @@
         }
         //清除最後一個div的img當作空格
         function removeimg() {
-            $(`#Pic${totalpiece - 1} img`).remove();
+            $(`#Pic${totalpiece - 1} img`).attr('src','');
         }
         function disablePick() {
             $('#pick').attr('disabled', true);
@@ -112,12 +112,38 @@
                 let col = i % level;
                 $(piclist[randomlist[i]]).css("margin-left", col * -piece).css("margin-top", row * -piece);
             }
+            console.log('randomlist is',randomlist);
+        }
+
+        function changePos() {
+           let newList=randomlist;
+           let blank=8;//randomlist[totalpiece-1];
+           let blankID=$(`#Pic${totalpiece-1}`).attr('id').substring(3);
+           console.log('blankID is',blankID);
+           let blankTop=$(`#Pic${blank} img`).css('margin-top');
+           let blankLeft=$(`#Pic${blank} img`).css('margin-left');
+           console.log('blankTop is',blankTop);
+           console.log('blankLeft is',blankLeft);
+           let pickID=$(this).attr('id').substring(3);
+           let pick=parseInt(pickID);
+           let pickTop=$(`#Pic${pick} img`).css('margin-top');
+           let pickLeft=$(`#Pic${pick} img`).css('margin-left');
+           console.log('pickmagintop is',pickTop);
+           console.log('pickmaginleft is',pickLeft);
+           console.log('pickID',pick);
+           if(Math.abs(pick-blankID)==1||Math.abs(pick-blankID)==3)
+           {
+            $(`#Pic${blank} img`).css('margin-top',pickTop);
+            $(`#Pic${blank} img`).css('margin-left',pickLeft);
+            $(`#Pic${blank} img`).attr('src','img/cat.jpg');
+            $(`#Pic${pick} img`).attr('src','');
+            blank=pick;
+           }
+
         }
         function abort() {
             location.reload();
         }
-
-
         $(document).ready(function () {
             $('#pick').change(function (e) {
                 level = getLV();
@@ -127,7 +153,9 @@
             $('#btnStr').click(removeimg);
             $('#btnStr').click(disablePick);
             $('#btnStr').click(shuffle);
+            $('.PicCell').click(changePos);
             $('#abortGame').click(abort);
+            
         });   
     </script>
 </head>
