@@ -19,8 +19,8 @@
         }
 
         .PicCell {
-            width: 198px;
-            height: 198px;
+            /* width: 198px;
+            height: 198px; */
             border-top: solid 1px white;
             border-left: solid 1px white;
             border-right: solid 1px gray;
@@ -37,6 +37,7 @@
         var level;
         var totalpiece;
         var currentBlank;
+        var gameStar=false;
         function getLV() {
             let n = $('#pick').val();
             return n
@@ -101,9 +102,11 @@
         }
         //清除最後一個div的img當作空格
         function removeimg() {
-            $(`#Pic${totalpiece - 1} img`).attr('src',"");
+            // $(`#Pic${totalpiece - 1} img`).attr('src',"");
+            $(`#Pic${totalpiece - 1} img`).remove();
         }
         function disablePick() {
+            gameStar=true;
             $('#pick').attr('disabled', true);
         }
         function shuffle() {
@@ -138,7 +141,7 @@
            console.log('pickmagintop is',pickTop);
            console.log('pickmaginleft is',pickLeft);
            console.log('pick is',pick);
-           if(Math.abs(pick-blankDivID)==1||Math.abs(pick-blankDivID)==3)
+           if(Math.abs(pick-blankDivID)==1||Math.abs(pick-blankDivID)==level)
            {
             $(`#Pic${blankDivID} img`).css('margin-top',pickTop);
             $(`#Pic${blankDivID} img`).css('margin-left',pickLeft);
@@ -146,6 +149,7 @@
             $(`#Pic${pick} img`).attr('src',"");
             $(`#Pic${blankDivID} img`).attr('id',pick);
             currentBlank = pick;
+            debugger
            }
 
         }
@@ -156,14 +160,17 @@
             $('#pick').change(function (e) {
                 level = getLV();
                 SetPicture(level)
+                if(gameStar!=false)
+                {
+                  $('.PicCell').click(changePos);
+                }
             });
             $('#pick').trigger('change');
             $('#btnStr').click(removeimg);
             $('#btnStr').click(disablePick);
             $('#btnStr').click(shuffle);
             $('.PicCell').click(changePos);
-            $('#abortGame').click(abort);
-            
+            $('#abortGame').click(abort);          
         });   
     </script>
 </head>
