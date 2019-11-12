@@ -19,8 +19,8 @@
         }
 
         .PicCell {
-            /* width: 198px;
-            height: 198px; */
+            width: 198px;
+            height: 198px;
             border-top: solid 1px white;
             border-left: solid 1px white;
             border-right: solid 1px gray;
@@ -36,9 +36,8 @@
     <script>
         var level;
         var totalpiece;
-        var currentBlank;
         function getLV() {
-            let n = $('#pick').val();
+            let n = $('#pickDivID').val();
             return n
         }
         var piclist = [];
@@ -48,7 +47,6 @@
             picSet.innerHTML = '';
             let currentRow;
             totalpiece = level * level;
-            currentBlank=totalpiece-1;
             let piece = 600 / level;
             for (var i = 0; i < totalpiece; i++) {
                 let row = parseInt(i / level);
@@ -101,11 +99,10 @@
         }
         //清除最後一個div的img當作空格
         function removeimg() {
-            $(`#Pic${totalpiece - 1} img`).attr('src',"");
+            $(`#Pic${totalpiece - 1} img`).attr('src'," ");
         }
-        function disablePick() {
-            gameStar=true;
-            $('#pick').attr('disabled', true);
+        function disablepickDivID() {
+            $('#pickDivID').attr('disabled', true);
         }
         function shuffle() {
             randomlist = randomPos();
@@ -115,64 +112,64 @@
                 let row = parseInt(i / level);
                 let col = i % level;
                 $(piclist[randomlist[i]]).css("margin-left", col * -piece).css("margin-top", row * -piece);
-                $(`#Pic${i} img`).attr('id',randomlist[i]);     
+                $(`#Pic${i} img`).attr('id',randomlist[i]);          
             }
             console.log('randomlist is',randomlist);
         }
+       
 
         function changePos() {
            let newList=randomlist;
         //    let blank=randomlist[totalpiece-1];
         //    console.log('blank is',blank);
-           let blankDivID=currentBlank;
+           let blankDivID=$(`#Pic${totalpiece-1}`).attr('id').substring(3);
            console.log('blankDivID is',blankDivID);
         //    let blankTop=$(`#Pic${blank} img`).css('margin-top');
         //    let blankLeft=$(`#Pic${blank} img`).css('margin-left');
            let blankTop=$(`#Pic${blankDivID} img`).css('margin-top'); //取得空白格的margin-top
            let blankLeft=$(`#Pic${blankDivID} img`).css('margin-left');//取得空白格的margin-left
+           let blankimgID=$(`#Pic${blankDivID} img`).attr('id');
            console.log('blankTop is',blankTop);
            console.log('blankLeft is',blankLeft);
-           let pickID=$(this).attr('id').substring(3);
-           let pick=parseInt(pickID);
-           let pickTop=$(`#Pic${pick} img`).css('margin-top');
-           let pickLeft=$(`#Pic${pick} img`).css('margin-left');
-           console.log('pickmagintop is',pickTop);
-           console.log('pickmaginleft is',pickLeft);
-           console.log('pick is',pick);
-           if(Math.abs(pick-blankDivID)==1||Math.abs(pick-blankDivID)==level)
+           let getpickDivIDID=$(this).attr('id').substring(3);
+           let pickDivID=parseInt(getpickDivIDID);
+           let pickTop=$(`#Pic${pickDivID} img`).css('margin-top');
+           let pickLeft=$(`#Pic${pickDivID} img`).css('margin-left');
+           let pickimgID=$(`#Pic${pickDivID} img`).attr('id');
+           console.log('pickDivIDmagintop is',pickTop);
+           console.log('pickDivIDmaginleft is',pickLeft);
+           console.log('pickDivID is',pickDivID);
+           if(Math.abs(pickDivID-blankDivID)==1||Math.abs(pickDivID-blankDivID)==3)
            {
             $(`#Pic${blankDivID} img`).css('margin-top',pickTop);
             $(`#Pic${blankDivID} img`).css('margin-left',pickLeft);
             $(`#Pic${blankDivID} img`).attr('src','img/cat.jpg');
-            $(`#Pic${pick} img`).attr('src',"");
-            $(`#Pic${blankDivID} img`).attr('id',pick);
-            currentBlank = pick;
+            $(`#Pic${blankDivID} img`).attr('id',pickimgID);
+            $(`#Pic${pickDivID} img`).css('margin-top',pickTop);
+            $(`#Pic${pickDivID} img`).css('margin-left',pickLeft);
+            $(`#Pic${pickDivID} img`).attr('src',"");
+            $(`#Pic${pickDivID} img`).attr('id',blankimgID);
+            blankDivID=pickDivID;
            }
+         
+          
 
         }
         function abort() {
             location.reload();
-            gameStar=false;
         }
         $(document).ready(function () {
-            var gameStar=false;
-            $('#pick').change(function (e) {
+            $('#pickDivID').change(function (e) {
                 level = getLV();
-                SetPicture(level);
-                if(gameStar=true)
-            { 
-              $('.PicCell').click(changePos);
-            }
+                SetPicture(level)
             });
-            $('#pick').trigger('change');
+            $('#pickDivID').trigger('change');
             $('#btnStr').click(removeimg);
-            $('#btnStr').click(disablePick);
+            $('#btnStr').click(disablepickDivID);
             $('#btnStr').click(shuffle);
-            if(gameStar=true)
-            {
-             $('.PicCell').click(changePos);
-            }         
-            $('#abortGame').click(abort);          
+            $('.PicCell').click(changePos);
+            $('#abortGame').click(abort);
+            
         });   
     </script>
 </head>
@@ -187,7 +184,7 @@
                 <div class="row mb-4">
                     <div class="col-3 col-12 text-center">
                         <p>難度選擇</p>
-                        <select id="pick" class="form-control">
+                        <select id="pickDivID" class="form-control">
                             <option value="3">3x3</option>
                             <option value="4">4x4</option>
                             <option value="5">5x5</option>
