@@ -18,14 +18,12 @@
             font-family: "微軟正黑體";
         }
 
-        .PicCell {
-            width: 198px;
-            height: 198px;
+        .picBlock {
             border-top: solid 1px white;
             border-left: solid 1px white;
             border-right: solid 1px gray;
             border-bottom: solid 1px gray;
-            overflow: hidden;
+            overflow: hidden;   
         }
 
         .imgSize {
@@ -36,6 +34,7 @@
     <script>
         var level;
         var totalpiece;
+        var currentBlank;
         function getLV() {
             let n = $('#pick').val();
             return n
@@ -47,6 +46,7 @@
             picSet.innerHTML = '';
             let currentRow;
             totalpiece = level * level;
+            currentBlank=totalpiece-1;
             let piece = 600 / level;
             for (var i = 0; i < totalpiece; i++) {
                 let row = parseInt(i / level);
@@ -57,11 +57,11 @@
                     $(currentRow).addClass('row');
                 }
                 //用程式的方式新增這段HTML
-                //<div class='PicCell col-4 col-4 p-0' id='Pic${i}'><img src='img/cat.jpg'class="imgSize" /></div>
+                //<div class='picBlock col-4 col-4 p-0' id='Pic${i}'><img src='img/cat.jpg'class="imgSize" /></div>
                 //STEP1 新增Col
                 let currentCell = document.createElement("div");
                 currentRow.appendChild(currentCell);
-                $(currentCell).addClass('PicCell col p-0 shadow');
+                $(currentCell).addClass('picBlock col p-0 shadow');
                 $(currentCell).attr('id', `Pic${i}`);
                 $(currentCell).css('height', `${piece - 2}px`);
                 $(currentCell).css('width', `${piece - 2}px`);
@@ -73,10 +73,9 @@
                 $(currentImg).attr('src', 'img/cat.jpg');
                 $(currentImg).addClass('imgSize');
                 $(currentImg).css("margin-left", col * -piece).css("margin-top", row * -piece);
+                $(currentImg).attr('id',`${i}`);
                 piclist.push(currentImg);
-                // console.log(col * -piece,',', row * -piece);
-                // var pos=$(`#Pic${i}`).offset();
-                // console.log(`Pic${i}`,pos.top,pos.left);
+                console.log('piclist is',piclist);
             }
 
         }
@@ -91,16 +90,16 @@
                 }
                 rtnList.push(randomPic)
             }
-            return rtnList;
+             return rtnList;
+             return [3, 2, 0, 1];
         }
-        function setPic() {
-
-        }
+        
         //清除最後一個div的img當作空格
         function removeimg() {
-            $(`#Pic${totalpiece - 1} img`).attr('src','');
+            $(`#Pic${totalpiece - 1} img`).attr('src',"img/blank.jpg");
         }
         function disablePick() {
+            gameStar=true;   
             $('#pick').attr('disabled', true);
         }
         function shuffle() {
@@ -108,63 +107,120 @@
             let piece = 600 / level;
             for(let i=0;i<randomlist.length;i++)
             {
-                let row = parseInt(i / level);
-                let col = i % level;
-                $(piclist[randomlist[i]]).css("margin-left", col * -piece).css("margin-top", row * -piece);
+                let row = parseInt(randomlist[i] / level);
+                let col = randomlist[i] % level;
+            
+                //$(piclist[randomlist[i]]).css("margin-left", col * -piece).css("margin-top", row * -piece);
+                //$(`#Pic${i} img`).attr('id',randomlist[i]);     
+                $(piclist[i]).css("margin-left", col * -piece).css("margin-top", row * -piece);
+                $(`#Pic${i} img`).attr('id',randomlist[i]);     
             }
             console.log('randomlist is',randomlist);
         }
 
         function changePos() {
-           let newList=randomlist;
-           let blank=randomlist[totalpiece-1];
-           let blankID=$(`#Pic${totalpiece-1}`).attr('id').substring(3);
-           console.log('blankID is',blankID);
-           let blankTop=$(`#Pic${blank} img`).css('margin-top');
-           let blankLeft=$(`#Pic${blank} img`).css('margin-left');
-           console.log('blankTop is',blankTop);
-           console.log('blankLeft is',blankLeft);
+            if(gameStar!=false)
+            {
+        //    let blank=randomlist[totalpiece-1];
+        //    console.log('blank is',blank);
+           let blankDivID=currentBlank;
+           let blankimgID=$(`#Pic${currentBlank} img`).attr("id");
+           console.log('blankDivID is',blankDivID);
+        //    let blankTop=$(`#Pic${blank} img`).css('margin-top');
+        //    let blankLeft=$(`#Pic${blank} img`).css('margin-left');
+           let blankTop=$(`#Pic${blankDivID} img`).css('margin-top'); //取得空白格的margin-top
+           let blankLeft=$(`#Pic${blankDivID} img`).css('margin-left');//取得空白格的margin-left
+        //    console.log('blankTop is',blankTop);
+        //    console.log('blankLeft is',blankLeft);
            let pickID=$(this).attr('id').substring(3);
+        //    debugger;
+           let pickimgID=$(this).find('img')[0].id;
            let pick=parseInt(pickID);
            let pickTop=$(`#Pic${pick} img`).css('margin-top');
            let pickLeft=$(`#Pic${pick} img`).css('margin-left');
-           console.log('pickmagintop is',pickTop);
-           console.log('pickmaginleft is',pickLeft);
-           console.log('pickID',pick);
-           if(Math.abs(pick-blankID)==1||Math.abs(pick-blankID)==3)
+        //    console.log('pickmagintop is',pickTop);
+        //    console.log('pickmaginleft is',pickLeft);
+        //    console.log('pick is',pick);
+           if(Math.abs(pick-blankDivID)==1||Math.abs(pick-blankDivID)==level)
            {
-               debugger;
-            $(`#Pic${blank} img`).css('margin-top',pickTop);
-            $(`#Pic${blank} img`).css('margin-left',pickLeft);
-            $(`#Pic${blank} img`).attr('src','img/cat.jpg');
-            $(`#Pic${pick} img`).attr('src','');
+            $(`#Pic${blankDivID} img`).css('margin-top',pickTop);
+            $(`#Pic${blankDivID} img`).css('margin-left',pickLeft);
+            $(`#Pic${blankDivID} img`).attr('src','img/cat.jpg');
+            $(`#Pic${pick} img`).attr('src',"img/blank.jpg");
+            // debugger;
+            $(`#Pic${pick} img`).attr('id',blankimgID);
+            $(`#Pic${blankDivID} img`).attr('id',pickimgID);
+            currentBlank = pick;
+            let newList=randomlist;
+            console.log("newList",newList);
+            if( win()==true)
+            {
+                alert('過關');
+            }      
+            }      
            }
-
         }
         function abort() {
             location.reload();
         }
+        // function win()
+        // {
+           
+        //     let check=$('.picBlock img');
+        //     for(let i=0;i<totalpiece;i++)
+        //     {
+        //         if( check[i].id!=i)
+        //         {
+        //             return false;
+        //         }
+                 
+        //     }
+        //    return true;
+           
+        // }
+         function win()
+        {
+           
+            let blocks=$('.picBlock');
+            let imgs=$('.picBlock img');
+            for(let i=0;i<totalpiece;i++)
+            {
+                debugger;
+                let num = parseInt($(imgs[i]).attr('id'));
+                console.log(num);
+                if( num !== i)
+                {
+                    return false;
+                }
+                
+            }
+           return true;
+           
+        }
         $(document).ready(function () {
+            var gameStar=false;
             $('#pick').change(function (e) {
                 level = getLV();
-                SetPicture(level)
+                SetPicture(level);               
+              $('.picBlock').click(changePos);           
             });
             $('#pick').trigger('change');
             $('#btnStr').click(removeimg);
             $('#btnStr').click(disablePick);
             $('#btnStr').click(shuffle);
-            $('.PicCell').click(changePos);
-            $('#abortGame').click(abort);
-            
+            $('.picBlock').click(changePos);
+                    
+            $('#abortGame').click(abort);          
         });   
     </script>
 </head>
+
 
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div id="picSet" class="col-6 p-0 justify-content-center">
-
+                   
             </div>
             <div class="col-3 ml-4 mb-5">
                 <div class="row mb-4">
