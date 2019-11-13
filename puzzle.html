@@ -90,8 +90,7 @@
                 }
                 rtnList.push(randomPic)
             }
-            return rtnList;
-            // return [2, 0, 3, 1];
+             return rtnList;
         }
         
         //清除最後一個div的img當作空格
@@ -107,9 +106,12 @@
             let piece = 600 / level;
             for(let i=0;i<randomlist.length;i++)
             {
-                let row = parseInt(i / level);
-                let col = i % level;
-                $(piclist[randomlist[i]]).css("margin-left", col * -piece).css("margin-top", row * -piece);
+                let row = parseInt(randomlist[i] / level);
+                let col = randomlist[i] % level;
+            
+                //$(piclist[randomlist[i]]).css("margin-left", col * -piece).css("margin-top", row * -piece);
+                //$(`#Pic${i} img`).attr('id',randomlist[i]);     
+                $(piclist[i]).css("margin-left", col * -piece).css("margin-top", row * -piece);
                 $(`#Pic${i} img`).attr('id',randomlist[i]);     
             }
             console.log('randomlist is',randomlist);
@@ -130,7 +132,7 @@
         //    console.log('blankTop is',blankTop);
         //    console.log('blankLeft is',blankLeft);
            let pickID=$(this).attr('id').substring(3);
-           debugger;
+        //    debugger;
            let pickimgID=$(this).find('img')[0].id;
            let pick=parseInt(pickID);
            let pickTop=$(`#Pic${pick} img`).css('margin-top');
@@ -144,7 +146,7 @@
             $(`#Pic${blankDivID} img`).css('margin-left',pickLeft);
             $(`#Pic${blankDivID} img`).attr('src','img/cat.jpg');
             $(`#Pic${pick} img`).attr('src',"img/blank.jpg");
-            debugger;
+            // debugger;
             $(`#Pic${pick} img`).attr('id',blankimgID);
             $(`#Pic${blankDivID} img`).attr('id',pickimgID);
             currentBlank = pick;
@@ -182,8 +184,10 @@
             let imgs=$('.picBlock img');
             for(let i=0;i<totalpiece;i++)
             {
-                let num = $(blocks[i]).attr('id').substring(3);
-                if( $(imgs[num]).attr('id') != randomlist[num])
+                debugger;
+                let num = parseInt($(imgs[i]).attr('id'));
+                console.log(num);
+                if( num !== i)
                 {
                     return false;
                 }
@@ -215,7 +219,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div id="picSet" class="col-6 p-0 justify-content-center">
-
+                   
             </div>
             <div class="col-3 ml-4 mb-5">
                 <div class="row mb-4">
