@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script>
+        // var json={
+        //          color:'#ffffff',
+        // }
+        function Binding(){
+            new Vue({
+             el:"#block",
+             data: {
+                    color: '#ffe6e6'
+                }
+           });
+          }
+        Vue.directive('background',{
+              bind:function(el,binding){
+                el.style.backgroundColor=binding.value;
+              },
+              update:function(el,binding){
+                el.style.backgroundColor=binding.value;
+              }
+          });
+        
+       
+      $(document).ready(function () {
+        Binding();
+      });   
+    </script>
+</head>
+<body>
+  <div class="container mt-5"id="block" >
+    <div class="col-4">
+      <p>顏色</p>
+      <input  type="text" class="form-control" v-model="color">
+      <p>背景</p>
+      <input  type="text" class="form-control"v-background="color">
+  </div>
+</div>
+</body>
+</html>

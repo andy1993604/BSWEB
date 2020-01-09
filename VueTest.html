@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  
+</head>
+
+<body>
+    <!-- <div id="block1">
+        <label>{{title}}</label>
+    </div> -->
+    <div class="container">
+        <div id="block1" class="row">
+            <div class="col">
+                <label>{{title}}<label>
+            </div>
+            <div class="col">
+                <input type="text" v-model="title">
+            </div>
+            <div class="col">
+                <button id="btn1" class="btn btn-success">12345</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // var json = { title: "標題" };
+    // function getTitle() {
+    //     new Vue(
+    //     {
+    //       el:"#block1",
+    //       data:json
+    //     }
+    //     );
+    // }
+
+    // function Binding() {
+    //     new Vue(
+    //         {
+    //             el: "#block1",
+    //             data: json
+    //         }
+    //     );
+    // }
+    // function setupClock() {
+    //     //更新頁面元素
+    //     //$('#lab1').html(Date())
+
+    //     //更新記憶體
+    //     json.title=Date();
+    //     //下一秒再執行一次，變成遞迴
+    //     setTimeout(setupClock, 1000);
+    // }
+    var json = { title: "標題" };
+    function Binding() {
+        new Vue(
+            {
+                el: "#block1",
+                data: json
+            }
+        );
+    }
+
+    function setText() {
+        //alert(json.title);
+        json.title = "12345";
+    }
+    $(document).ready(function () {
+        // getTitle();
+        //setupClock();
+        setText();
+        Binding();
+        $('#btn1').click(function (e) {
+            setText();
+        });
+    });
+</script>

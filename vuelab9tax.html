@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+        var json={
+                 color:'#ffffff',
+        }
+          function Binding(){
+            new Vue({
+             el:"#block",
+             data:json,
+           });
+          }
+          Vue.directive('background',{
+              bind:function(el,binding){
+                el.sytle.backgroundColor=binding.value;
+              },
+              update:function(el,binding){
+                el.sytle.backgroundColor=binding.value;
+              }
+
+          });
+      $(document).ready(function () {
+        Binding();
+      });   
+    </script>
+</head>
+<body>
+    <div class="container">
+      <div class="row">
+          <div class="col-4"id="block">
+              <p>顏色</p>
+              <input v-model="color" type="text" class="form-control">
+              <p>背景</p>
+              <input v-background="color" type="text" class="form-control value="test words">
+              <p>BMI={{result}}</p>
+          </div>
+      </div>    
+
+    </div>
+    
+</body>
+</html>

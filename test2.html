@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+
+    .icon {
+        font-size: 18px;
+    }
+
+    .band {
+        
+        color: black;
+    }
+    .band:hover {
+         text-decoration:none;
+         color:black;
+    }
+    .navTop {
+        line-height: 40px;
+    }
+    .title {
+        font-family: 'Merriweather', serif;
+        font-size: 55pt;
+        font-weight: 400;
+    }
+
+    .btn-outline-dark {
+        color: #343a40;
+        border-color: #343a40;
+        border: 3px solid;
+        background: white;
+    }
+
+    .dot:hover {
+        border-bottom: 1px dotted;
+    }
+
+    .icon:hover {
+        color: black;
+        transition: .2s;
+    }
+/*頁面商品分類選單*/
+     .main-nav{
+         display:none;
+     }
+     .main-nav .nav-item .nav-link .line {
+        border-bottom: 2px solid white;
+        display: block;
+        transition: 0.5s;
+    }
+
+    .main-nav .nav-item:hover .nav-link .line {
+        transition: 0.5s;
+        border-bottom: 2px solid black;
+    }
+    .menu-block {
+        background-color: rgba(250,250,250,.95);
+        width: 100%;
+        position: absolute;
+        left: 0;
+        margin-top: 10px;
+        box-shadow: 1px 1px 10px #ddd;
+        padding: 40px;
+        z-index: 99;
+        display: none;
+        opacity: 0;
+    }
+    .bg-menu {
+         background-color: rgba(250,250,250,.95);
+         letter-spacing:0.5px;
+         font-weight:100;
+    }
+    .menu-list{
+        padding:0;
+     }
+    .menu-list li {
+        padding:.3rem 0;
+        list-style:none;
+        color:black
+    }
+    .menu-list li a,
+    .menu-list li a:hover{
+         text-decoration:none;
+         color:black;
+    }
+    .menu-list li:not(:first-child){
+        font-weight:100;
+    }
+    .main-nav .nav-item:hover .menu-block {
+        display: block;
+        transition: .2s;
+        opacity: 1;
+    }
+  
+</style>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom p-0 justify-content-between">
+        <button class="navbar-toggler"onclick="openNav()" id="Slide-btn" type="button" data-toggle="collapse" data-target="#" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse p-0 justify-content-between" id="navbarNavDropdown">
+            <ul class="navbar-nav p-0">
+                <li class="nav-item active border-right  p-0">
+                    <a class="nav-link text-dark mx-3 navTop" href="#"><span class="dot">ACCOUNT</span></a>
+                </li>
+                <li class="nav-item active">           
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark  mx-3 navTop" href="#"><span class="dot">REGISTER</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav p-0 text-center">
+
+                <li class="nav-item active border-right border-left  p-0">
+                    <a class="nav-link text-dark  mx-3 navTop Quick-Search" href="">
+                        <i class="fas fa-search icon"></i>                                          
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-dark  mx-3 navTop" href="#"><span class="dot">GIFT CERTIFICATES</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark mx-3 navTop border-right border-left" href="#"><span class="dot">WISH LISTS</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark   mx-3 navTop" href="#"><span class="dot">CART</span><i class="far fa-clipboard icon ml-3"></i></a>
+                </li>
+            </ul>
+        </div>     
+    </nav>
+    <div class="container-fluid search-bar-md-warp">
+            <div class="input-group search-bar-md">
+                <input type="text" class="form-control rounded-0" placeholder="Search">
+                <div class="input-group-append">
+                    <a href="#" class="input-group-text rounded-0 search-bar-icon">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+            </div>
+        </div> 
+        <!-- <div id=SideNavbar class="sidebar">
+                <a href="#" id="close" class="closebtn">x</a>
+                <ul>
+                   <li><a href="#">NEW</a></li>
+                   <li><a href="#">EARRINGS</a></li>
+                   <li><a href="#">NECKLACES</a></li>
+                   <li><a href="#">Contact</a></li>
+                   <li><a href="#">BRACELETS</a></li>
+                   <li><a href="#">RINGS</a></li>
+                   <li><a href="#">OTHER ACCESSORIES</a></li>
+                   <li><a href="#">SALE</a></li>
+                </ul>
+        </div> -->
+        <div id="mySidenav" class="sidenav">
+                <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+                <ul class="p-0">
+                        <li><a href="#">NEW</a></li>
+                        <li><a href="#">EARRINGS</a></li>
+                        <li><a href="#">NECKLACES</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">BRACELETS</a></li>
+                        <li><a href="#">RINGS</a></li>
+                        <li><a href="#">OTHER ACCESSORIES</a></li>
+                        <li><a href="#">SALE</a></li>
+                     </ul>
+              </div>
+                           
+</body>
+</html>
+<style>
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  transition: 0.5s;
+  box-shadow: 1px 1px 10px #ddd;
+  padding-top: 60px;
+}
+.sidenav li{
+    list-style:none;
+    display: flex;
+    /* line-height:2.5rem; */
+    border-top:1px solid rgb(190, 190, 190);
+    
+}
+.sidenav li:hover{
+   color: rgb(255, 255, 255);
+   background: black;
+   transition: .5s linear;
+
+
+}
+.sidenav li:hover a{
+   color: rgb(255, 255, 255);
+}
+.sidenav a {
+  justify-content: flex-start;
+  text-decoration: none;
+  font-size:14px;
+  color: #000000;
+  display: block;
+  transition: 0.3s;
+  padding:.5rem 0 .5rem .8rem;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top:.2rem;
+  right:.5rem;
+  font-size:28px;
+}
+    </style>
+    <script>
+       function openNav() {
+       document.getElementById("mySidenav").style.width = "300px";
+       document.getElementById("main").style.marginLeft = "300px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+    </script>
+

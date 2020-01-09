@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+        var json={
+                 
+                 weight:0,
+                 height:0,
+        }
+          function Binding(){
+            new Vue({
+             el:"#block",
+             data:json,
+             computed:{
+                 result:function(){
+                    var height2=this.height/100;
+                    var bmi=this.weight/(height2*height2);
+                     return bmi;
+                 }
+
+             }
+           });
+          }
+      $(document).ready(function () {
+        Binding();
+      });   
+    </script>
+</head>
+<body>
+    <div class="container">
+      <div class="row">
+          <div class="col-4"id="block">
+              <p>身高:</p>
+              <input v-model="height" type="text" class="form-control">
+              <p>體重:</p>
+              <input v-model="weight" type="text" class="form-control">
+              <p>BMI={{result}}</p>
+          </div>
+      </div>    
+
+    </div>
+    
+</body>
+</html>
